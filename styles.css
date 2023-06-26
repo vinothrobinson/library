@@ -1,0 +1,34 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 15% 85%;
+    height: 100vh;
+}
+
+.header {
+    background-color: #d1d5db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-title {
+    font-family: "Economica";
+    font-size: 40px;
+}
+
+.book-display {
+    background-color: white;
+}
+
+.book {
+    display: flex;
+    height: 10vh;
+    width: 30vh;
+    margin-top: 10px;
+    margin-left: 10px;
+}
