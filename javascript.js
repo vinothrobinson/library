@@ -18,11 +18,16 @@ function Book(title, author, pages, read){
 		const infoString = `${this.title} by ${this.author}, ${this.pages} pages, ${readMessage}`
 		return infoString
     }
-    this.addBookToLibrary = function() {
-        myLibrary.push(this);
-        console.log(myLibrary)
-        displayLibrary() ;
-    }
+}
+
+function addBookToLibrary() {
+    let title = document.querySelector("#title").value;
+    let author = document.querySelector("#author").value;
+    let pages = document.querySelector("#pages").value;
+    let read = document.querySelector("#read").value;
+    let newBook = new Book(title, author, pages, read);
+    myLibrary.push(newBook);
+    displayLibrary()
 }
 
 function displayLibrary() {
@@ -57,27 +62,30 @@ function displayLibrary() {
     }
 }
 
+const newBookBtn = document.querySelector("#new-book-btn");
+let isHidden = true;
+newBookBtn.addEventListener("click", function() {
+    if (isHidden) {
+        const newBookForm = document.querySelector("#new-book-form");
+        newBookForm.style.display = "flex";
+        isHidden = false;
+    }
+    else {
+        const newBookForm = document.querySelector("#new-book-form");
+        newBookForm.style.display = "none";
+        isHidden = true;
+    }
+})
 
-const newBook = new Book("JJK", "Gege Akutami", "325", true)
-console.log(newBook.info())
-newBook.addBookToLibrary();
+document.querySelector("#new-book-form").addEventListener("submit", function() {
+    event.preventDefault();
+    addBookToLibrary();
+})
 
-const newBook2 = new Book("Black Clover", "Yuki Tabata", "360", true)
-console.log(newBook2.info())
-newBook2.addBookToLibrary();
 
-const newBook3 = new Book("MHA", "Kohei Horikoshi", "370", false)
-console.log(newBook3.info())
-newBook3.addBookToLibrary();
 
-const newBook4 = new Book("Monster", "Naoki Urasawa", "100", true)
-console.log(newBook4.info())
-newBook4.addBookToLibrary();
+// This piece of code removes the "Confirm form resubmission" pop up
+if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+  }
 
-const newBook5 = new Book("Full Metal Alchemist", "Hiromu Arakawa", "200", true)
-console.log(newBook5.info())
-newBook5.addBookToLibrary();
-
-const newBook6 = new Book("Naruto", "Kishimoto", "700", false)
-console.log(newBook6.info())
-newBook6.addBookToLibrary();
