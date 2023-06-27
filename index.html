@@ -13,7 +13,28 @@
         <div class="header">
             <h1 class="main-title">The Library</h1>
         </div>
-        <div class="book-display"></div>
+        <div class="library">
+            <div class="create-book">
+            <button id="new-book-btn">New Book</button>
+            <form id="new-book-form" action="" method="post" style="display: none">
+                    <label for="book-title">Title
+                        <input type="text" id="title">
+                    </label>
+                    <label for="author">Author
+                        <input type="text" id="author">
+                    </label>
+                    <label for="pages">Pages
+                        <input type="number" id="pages">
+                    </label>
+                    <label for="read">Have You Read This Book?
+                        <input type="checkbox" id="read">
+                    </label>
+                    <input type="submit" value="Add Book">
+                </form>
+            </div>
+            <div class="book-display">
+            </div>
+        </div>
     </div>
 </body>
 </html>
