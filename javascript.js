@@ -24,13 +24,20 @@ function addBookToLibrary() {
     let title = document.querySelector("#title").value;
     let author = document.querySelector("#author").value;
     let pages = document.querySelector("#pages").value;
-    let read = document.querySelector("#read").value;
+    let read = true;
+    if (document.querySelector("#read").checked) {
+        read = true;
+    }
+    else {
+        read = false;
+    }
     let newBook = new Book(title, author, pages, read);
     myLibrary.push(newBook);
     displayLibrary()
 }
 
 function displayLibrary() {
+    console.log(myLibrary)
     const shelf = document.querySelector(".book-display")
     shelf.replaceChildren();
     for (let i = 0; i < myLibrary.length; i++) {
@@ -48,17 +55,41 @@ function displayLibrary() {
         const pages = document.createElement('div')
         pages.classList.add("pages");
         pages.innerHTML = `${myLibrary[i].pages} pages`
+        const read = document.createElement('button');
+        read.classList.add("read")
+        if (myLibrary[i].read) {
+            read.innerHTML = "Read"
+            read.style.backgroundColor = "#22c55e"
+        }
+        if (!myLibrary[i].read) {
+            read.innerHTML = "Not Read"
+            read.style.backgroundColor = "#ef4444"
+        }
+        read.addEventListener("click", toggleReadStatus)
 
         // Adding the individual divs to the book container
         book.appendChild(title)
         book.appendChild(author)
         book.appendChild(pages)
+        book.appendChild(read)
         /*
         const read = document.createElement('div')
         read.classList.add("read")
         book.innerHTML = myLibrary[i].info();
         */
         shelf.appendChild(book);
+    }
+}
+
+function toggleReadStatus() {
+    let readDiv = document.querySelector(".read");
+    if (this.innerHTML === "Read") {
+        readDiv.innerHTML = "Not Read"
+        readDiv.style.backgroundColor = "#ef4444"
+    }
+    else {
+        readDiv.innerHTML = "Read"
+        readDiv.style.backgroundColor = "#22c55e"
     }
 }
 
