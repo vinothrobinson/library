@@ -44,18 +44,44 @@
     font-family: "Roboto";
 }
 
-.create-book {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
+#read {
+    margin-top: 5px;
 }
 
+.read {
+    margin-top: 10px;
+    margin-bottom: 50px;
+    width: 10vh;
+    height: 3vh;
+    font-family: "Roboto";
+    color: white;
+    border: solid 1px #d6d3d1;
+}
+
+.remove {
+    margin-bottom: 40px;
+    margin-left: 21vh;
+    width: 5vh;
+    color: white;
+    border: solid 1px #d6d3d1;
+    font-size: 1rem;
+    position: relative;
+}
+
+/* Styling for the new book button */
 #new-book-btn {
     margin-top: 10px;
     margin-bottom: 10px;
     height: 5vh;
     width: 20vh;
+}
+
+/* Styling for the form for inputting book information */
+.create-book {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 #new-book-form {
@@ -85,17 +111,4 @@ label {
 
 form>label+label+label+label {
     text-align: center;
-}
-
-#read {
-    margin-top: 5px;
-}
-
-.read {
-    margin-top: 10px;
-    width: 10vh;
-    height: 3vh;
-    font-family: "Roboto";
-    color: white;
-    border: solid 1px #d6d3d1;
 }
