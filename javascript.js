@@ -71,11 +71,18 @@ function displayLibrary() {
             read.style.backgroundColor = "#ef4444"
         }
         read.addEventListener("click", toggleReadStatus)
+        // Adds a button to remove a book from the library
+        const remove = document.createElement('button');
+        remove.classList.add("remove");
+        remove.style.backgroundColor = "#3b82f6"
+        remove.innerHTML = "-"
+        remove.addEventListener("click", removeBook)
         // Adding the individual divs to the book container
-        book.appendChild(title)
-        book.appendChild(author)
-        book.appendChild(pages)
-        book.appendChild(read)
+        book.appendChild(remove);
+        book.appendChild(title);
+        book.appendChild(author);
+        book.appendChild(pages);
+        book.appendChild(read);
         // Append the book to the library
         shelf.appendChild(book);
     }
@@ -91,6 +98,18 @@ function toggleReadStatus() {
         readDiv.innerHTML = "Read"
         readDiv.style.backgroundColor = "#22c55e"
     }
+}
+
+function removeBook() {
+    let bookTitle = document.querySelector(".title").innerHTML
+    console.log(bookTitle)
+    for (let i = 0; i < myLibrary.length; i++) {
+        if (bookTitle === myLibrary[i].title) {
+            myLibrary.splice(i, 1);
+            break;
+        }
+    }
+    displayLibrary()
 }
 
 const newBookBtn = document.querySelector("#new-book-btn");
@@ -113,8 +132,6 @@ document.querySelector("#new-book-form").addEventListener("submit", function(eve
     event.preventDefault();
     addBookToLibrary();
 })
-
-
 
 // This piece of code removes the "Confirm form resubmission" pop up
 if ( window.history.replaceState ) {
