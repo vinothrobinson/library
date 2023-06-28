@@ -20,6 +20,7 @@ function Book(title, author, pages, read){
     }
 }
 
+// Takes the user input and creates a book and adds it to the library
 function addBookToLibrary() {
     let title = document.querySelector("#title").value;
     let author = document.querySelector("#author").value;
@@ -46,15 +47,19 @@ function displayLibrary() {
         book.classList.add("book");
         book.style.backgroundColor = "#d6d3d1"
         // Individual divs for each section of a book
+        // Adds the book title to the display
         const title = document.createElement('div')
         title.classList.add("title");
         title.innerHTML = myLibrary[i].title
+        // Adds the book's author to the display
         const author = document.createElement('div')
         author.classList.add("author");
         author.innerHTML = myLibrary[i].author
+        // Adds the number of pages in the book to the display
         const pages = document.createElement('div')
         pages.classList.add("pages");
         pages.innerHTML = `${myLibrary[i].pages} pages`
+        // Adds a Read / Not Read button to the display
         const read = document.createElement('button');
         read.classList.add("read")
         if (myLibrary[i].read) {
@@ -66,17 +71,12 @@ function displayLibrary() {
             read.style.backgroundColor = "#ef4444"
         }
         read.addEventListener("click", toggleReadStatus)
-
         // Adding the individual divs to the book container
         book.appendChild(title)
         book.appendChild(author)
         book.appendChild(pages)
         book.appendChild(read)
-        /*
-        const read = document.createElement('div')
-        read.classList.add("read")
-        book.innerHTML = myLibrary[i].info();
-        */
+        // Append the book to the library
         shelf.appendChild(book);
     }
 }
@@ -108,7 +108,8 @@ newBookBtn.addEventListener("click", function() {
     }
 })
 
-document.querySelector("#new-book-form").addEventListener("submit", function() {
+// This allows for the user inputted information to be sent from the form and to the library
+document.querySelector("#new-book-form").addEventListener("submit", function(event) {
     event.preventDefault();
     addBookToLibrary();
 })
