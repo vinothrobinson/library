@@ -7,17 +7,6 @@ function Book(title, author, pages, read){
 	this.author = author;
 	this.pages = pages;
 	this.read = read;
-	this.info = function() {
-		let readMessage = "";
-		if (this.read) {
-			readMessage = "has been read"
-		}
-		if (!this.read) {
-			readMessage = "not read yet"
-		}
-		const infoString = `${this.title} by ${this.author}, ${this.pages} pages, ${readMessage}`
-		return infoString
-    }
 }
 
 // Takes the user input and creates a book and adds it to the library
@@ -38,7 +27,6 @@ function addBookToLibrary() {
 }
 
 function displayLibrary() {
-    console.log(myLibrary)
     const shelf = document.querySelector(".book-display")
     shelf.replaceChildren();
     for (let i = 0; i < myLibrary.length; i++) {
@@ -46,69 +34,44 @@ function displayLibrary() {
         const book = document.createElement('div');
         book.classList.add("book");
         book.style.backgroundColor = "#d6d3d1"
-        // Individual divs for each section of a book
-        // Adds the book title to the display
-        const title = document.createElement('div')
-        title.classList.add("title");
-        title.innerHTML = myLibrary[i].title
-        // Adds the book's author to the display
-        const author = document.createElement('div')
-        author.classList.add("author");
-        author.innerHTML = myLibrary[i].author
-        // Adds the number of pages in the book to the display
-        const pages = document.createElement('div')
-        pages.classList.add("pages");
-        pages.innerHTML = `${myLibrary[i].pages} pages`
-        // Adds a Read / Not Read button to the display
-        const read = document.createElement('button');
-        read.classList.add("read")
+        // Adding the elements of the book to the book element
+        book.innerHTML = `
+            <button class="remove" onclick="removeBook(${i})">-</button>
+            <div class="title">${myLibrary[i].title}</div>
+            <div class="author">${myLibrary[i].author}</div>
+            <div class="pages">${myLibrary[i].pages} pages</div>
+            <button class="read" onclick="toggleReadStatus(${i})">${myLibrary[i].read ? "Read" : "Not Read"}</button>
+        `
+/*
         if (myLibrary[i].read) {
-            read.innerHTML = "Read"
-            read.style.backgroundColor = "#22c55e"
+            let readDiv = document.querySelector(".read");
+            readDiv.style.backgroundColor = "#22c55e"
         }
         if (!myLibrary[i].read) {
-            read.innerHTML = "Not Read"
-            read.style.backgroundColor = "#ef4444"
-        }
-        read.addEventListener("click", toggleReadStatus)
-        // Adds a button to remove a book from the library
-        const remove = document.createElement('button');
-        remove.classList.add("remove");
-        remove.style.backgroundColor = "#3b82f6"
-        remove.innerHTML = "-"
-        remove.addEventListener("click", removeBook)
-        // Adding the individual divs to the book container
-        book.appendChild(remove);
-        book.appendChild(title);
-        book.appendChild(author);
-        book.appendChild(pages);
-        book.appendChild(read);
+            let readDiv = document.querySelector(".read");
+            readDiv.style.backgroundColor = "#ef4444"
+        }  
+*/
         // Append the book to the library
         shelf.appendChild(book);
     }
 }
 
-function toggleReadStatus() {
-    let readDiv = document.querySelector(".read");
-    if (this.innerHTML === "Read") {
-        readDiv.innerHTML = "Not Read"
-        readDiv.style.backgroundColor = "#ef4444"
+function toggleReadStatus(index) {
+    let readDiv = myLibrary[index];
+    if (readDiv.read) {
+        readDiv.read = false;
+        // readDiv.style.backgroundColor = "#ef4444"
     }
     else {
-        readDiv.innerHTML = "Read"
-        readDiv.style.backgroundColor = "#22c55e"
+        readDiv.read = true;
+        // readDiv.style.backgroundColor = "#22c55e"
     }
+    displayLibrary();
 }
 
-function removeBook() {
-    let bookTitle = document.querySelector(".title").innerHTML
-    console.log(bookTitle)
-    for (let i = 0; i < myLibrary.length; i++) {
-        if (bookTitle === myLibrary[i].title) {
-            myLibrary.splice(i, 1);
-            break;
-        }
-    }
+function removeBook(index) {
+    myLibrary.splice(index, 1)
     displayLibrary()
 }
 
