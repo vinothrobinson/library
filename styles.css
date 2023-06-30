@@ -99,7 +99,7 @@ input {
     /* margin-bottom: 20px; */
     width: 230px;
     height: 20px;
-    text-align: center;
+    text-align: left;
 }
 
 label {
@@ -111,4 +111,47 @@ label {
 
 form>label+label+label+label {
     text-align: center;
+}
+
+form>label+label+label+label+input {
+    text-align: center;
+}
+
+/* Media queries to make the screen more responsive */
+@media screen and (max-width: 1096px) {
+    .book-display {
+        grid-template-columns: repeat(4, 25%);
+    }
+}
+
+@media screen and (max-width: 770px) {
+    .book-display {
+        grid-template-columns: repeat(3, 33%);
+    }
+}
+
+@media screen and (max-width: 425px) {
+    .book-display {
+        grid-template-columns: repeat(2, 50%);
+    }
+}
+
+@media screen and (max-width: 325px) {
+    .book-display {
+        grid-template-columns: repeat(1, 100%);
+        margin-left: 10%
+    }
+    .remove {
+        margin-bottom: 20px;
+    }
+    #read {
+        margin-left: 0px;
+        width: 230px;
+    }
+    label {
+        margin-left: 20px;
+    }
+    input {
+        width: 200px;
+    }
 }
