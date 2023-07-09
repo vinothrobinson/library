@@ -2,12 +2,23 @@
 let myLibrary = [];
 
 // Constructor for Books
+class Book
+{
+    constructor(title, author, pages, read) {
+        this.title = title;
+	    this.author = author;
+	    this.pages = pages;
+	    this.read = read;
+    }
+}
+/*
 function Book(title, author, pages, read){
 	this.title = title;
 	this.author = author;
 	this.pages = pages;
 	this.read = read;
 }
+*/
 
 // Takes the user input and creates a book and adds it to the library
 function addBookToLibrary() {
@@ -42,17 +53,6 @@ function displayLibrary() {
             <div class="pages">${myLibrary[i].pages} pages</div>
             <button class="read" onclick="toggleReadStatus(${i})">${myLibrary[i].read ? "Read" : "Not Read"}</button>
         `
-/*
-        if (myLibrary[i].read) {
-            let readDiv = document.querySelector(".read");
-            readDiv.style.backgroundColor = "#22c55e"
-        }
-        if (!myLibrary[i].read) {
-            let readDiv = document.querySelector(".read");
-            readDiv.style.backgroundColor = "#ef4444"
-        }  
-*/
-        // Append the book to the library
         shelf.appendChild(book);
     }
 }
