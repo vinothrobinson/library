@@ -8,14 +8,6 @@ class Book
 	    this.read = read;
     }
 }
-/*
-function Book(title, author, pages, read){
-	this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.read = read;
-}
-*/
 
 // Takes the user input and creates a book and adds it to the library
 function addBookToLibrary() {
@@ -32,7 +24,7 @@ function addBookToLibrary() {
     else {
         read = false;
     }
-    form.reset();
+    form.reset(); // Clears the form contents
     let newBook = new Book(title, author, pages, read);
     console.log(newBook)
     console.log(myLibrary)
@@ -101,11 +93,13 @@ document.querySelector("#new-book-form").addEventListener("submit", function(eve
     addBookToLibrary();
 })
 
+// This function stores the contents of the library to localStorage
 function storeLists(myLibrary) {
     let library = JSON.stringify(myLibrary);
     localStorage.setItem("library", library);
 }
 
+// This function retrieves the contents of the library from localStorage
 function getLists() {
     let libraryString = localStorage.getItem("library");
     myLibrary = JSON.parse(libraryString);
@@ -120,7 +114,6 @@ if ( window.history.replaceState ) {
 if(document.cookie.indexOf('mycookie')==-1) {
     // The cookie doesn't exist. Create it now
     document.cookie = 'mycookie=1';
-    // let myLibrary = []
     // Array that stores all books
     let myLibrary = [];
     myLibrary = getLists()
