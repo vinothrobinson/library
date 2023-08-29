@@ -1,3 +1,4 @@
+let myLibrary = []
 // Constructor for Books
 class Book
 {
@@ -27,13 +28,15 @@ function addBookToLibrary() {
     form.reset(); // Clears the form contents
     let newBook = new Book(title, author, pages, read);
     console.log(newBook)
-    console.log(myLibrary)
+    myLibrary = getLibrary()
     myLibrary.push(newBook);
     storeLists(myLibrary);
-    displayLibrary(myLibrary);
+    displayLibrary();
 }
 
-function displayLibrary(myLibrary) {
+function displayLibrary() {
+    myLibrary = getLists()
+    console.log(myLibrary)
     const shelf = document.querySelector(".book-display")
     shelf.replaceChildren();
     for (let i = 0; i < myLibrary.length; i++) {
@@ -63,13 +66,13 @@ function toggleReadStatus(index) {
         readDiv.read = true;
         // readDiv.style.backgroundColor = "#22c55e"
     }
-    displayLibrary(myLibrary);
+    displayLibrary();
 }
 
 function removeBook(index) {
     myLibrary.splice(index, 1)
     storeLists(myLibrary)
-    displayLibrary(myLibrary)
+    displayLibrary()
 }
 
 const newBookBtn = document.querySelector("#new-book-btn");
@@ -102,25 +105,44 @@ function storeLists(myLibrary) {
 // This function retrieves the contents of the library from localStorage
 function getLists() {
     let libraryString = localStorage.getItem("library");
+    myLibrary = getLibrary();
     myLibrary = JSON.parse(libraryString);
     return myLibrary;
 }
+
+function getLibrary() {
+    return myLibrary
+}
+
 
 // This piece of code removes the "Confirm form resubmission" pop up
 if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
   }
 
-if(document.cookie.indexOf('mycookie')==-1) {
+  /*
+if (document.cookie.indexOf('mycookie')!==1) {
     // The cookie doesn't exist. Create it now
     document.cookie = 'mycookie=1';
     // Array that stores all books
-    let myLibrary = [];
-    myLibrary = getLists()
-    displayLibrary(myLibrary)
+    storeLists(myLibrary);
+    // console.log(myLibrary)
+    displayLibrary()
 }
 else {
     // Not the first visit, so alert
-    myLibrary = getLists()
-    displayLibrary(myLibrary)
+    getLists()
+    displayLibrary()
+}
+*/
+
+window.onbeforeunload = function() {
+    storeLists(myLibrary);
+    // console.log(myLibrary)
+    displayLibrary()
+}
+
+window.onload = function() {
+    getLists()
+    displayLibrary()
 }
