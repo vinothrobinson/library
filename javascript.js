@@ -28,15 +28,14 @@ function addBookToLibrary() {
     form.reset(); // Clears the form contents
     let newBook = new Book(title, author, pages, read);
     console.log(newBook)
-    myLibrary = getLibrary()
     myLibrary.push(newBook);
     storeLists(myLibrary);
     displayLibrary();
 }
 
 function displayLibrary() {
-    myLibrary = getLists()
-    console.log(myLibrary)
+    // let myLibrary = getLists()
+    // console.log(myLibrary)
     const shelf = document.querySelector(".book-display")
     shelf.replaceChildren();
     for (let i = 0; i < myLibrary.length; i++) {
@@ -98,22 +97,19 @@ document.querySelector("#new-book-form").addEventListener("submit", function(eve
 
 // This function stores the contents of the library to localStorage
 function storeLists(myLibrary) {
+    console.log("Testing storeLists")
     let library = JSON.stringify(myLibrary);
+    console.log(library)
     localStorage.setItem("library", library);
 }
 
 // This function retrieves the contents of the library from localStorage
 function getLists() {
     let libraryString = localStorage.getItem("library");
-    myLibrary = getLibrary();
     myLibrary = JSON.parse(libraryString);
+    console.log(myLibrary)
     return myLibrary;
 }
-
-function getLibrary() {
-    return myLibrary
-}
-
 
 // This piece of code removes the "Confirm form resubmission" pop up
 if ( window.history.replaceState ) {
@@ -138,13 +134,17 @@ else {
 
 
 // New Method for checking for reloads / refresh
+/*
 window.onbeforeunload = function() {
+    let myLibrary = []
     storeLists(myLibrary);
     // console.log(myLibrary)
     displayLibrary()
 }
+*/
 
 window.onload = function() {
-    getLists()
-    displayLibrary()
+    console.log("Onload function is being run")
+    myLibrary = getLists()
+    displayLibrary(myLibrary)
 }
