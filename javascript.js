@@ -96,12 +96,12 @@ document.querySelector("#new-book-form").addEventListener("submit", function(eve
 // This function stores the contents of the library to localStorage
 function storeLists(myLibrary) {
     let library = JSON.stringify(myLibrary);
-    sessionStorage.setItem("library", library);
+    localStorage.setItem("library", library);
 }
 
 // This function retrieves the contents of the library from localStorage
 function getLists() {
-    let libraryString = sessionStorage.getItem("library");
+    let libraryString = localStorage.getItem("library");
     myLibrary = JSON.parse(libraryString);
     return myLibrary;
 }
