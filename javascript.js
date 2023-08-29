@@ -1,3 +1,5 @@
+import 'https://tomashubelbauer.github.io/github-pages-local-storage/index.js';
+
 // Constructor for Books
 class Book
 {
