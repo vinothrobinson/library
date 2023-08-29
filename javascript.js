@@ -1,5 +1,3 @@
-import 'https://tomashubelbauer.github.io/github-pages-local-storage/index.js';
-
 // Constructor for Books
 class Book
 {
@@ -98,12 +96,12 @@ document.querySelector("#new-book-form").addEventListener("submit", function(eve
 // This function stores the contents of the library to localStorage
 function storeLists(myLibrary) {
     let library = JSON.stringify(myLibrary);
-    localStorage.setItem("library", library);
+    sessionStorage.setItem("library", library);
 }
 
 // This function retrieves the contents of the library from localStorage
 function getLists() {
-    let libraryString = localStorage.getItem("library");
+    let libraryString = sessionStorage.getItem("library");
     myLibrary = JSON.parse(libraryString);
     return myLibrary;
 }
