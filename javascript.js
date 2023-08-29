@@ -136,6 +136,8 @@ else {
 }
 */
 
+
+// New Method for checking for reloads / refresh
 window.onbeforeunload = function() {
     storeLists(myLibrary);
     // console.log(myLibrary)
