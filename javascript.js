@@ -149,5 +149,5 @@ window.onload = function() {
     if (myLibrary === null) {
         myLibrary = [];
     }
-    displayLibrary(myLibrary)
+    displayLibrary()
 }
