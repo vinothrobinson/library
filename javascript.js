@@ -137,14 +137,17 @@ else {
 /*
 window.onbeforeunload = function() {
     let myLibrary = []
-    storeLists(myLibrary);
+    // storeLists(myLibrary);
     // console.log(myLibrary)
-    displayLibrary()
+    // displayLibrary()
 }
 */
 
 window.onload = function() {
     console.log("Onload function is being run")
     myLibrary = getLists()
+    if (myLibrary === null) {
+        myLibrary = [];
+    }
     displayLibrary(myLibrary)
 }
