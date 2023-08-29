@@ -1,6 +1,3 @@
-// Array that stores all books
-let myLibrary = [];
-
 // Constructor for Books
 class Book
 {
@@ -22,6 +19,9 @@ function Book(title, author, pages, read){
 
 // Takes the user input and creates a book and adds it to the library
 function addBookToLibrary() {
+    const form = document.querySelector("#new-book-form");
+    form.style.display = "none";
+    isHidden = true;
     let title = document.querySelector("#title").value;
     let author = document.querySelector("#author").value;
     let pages = document.querySelector("#pages").value;
@@ -32,12 +32,16 @@ function addBookToLibrary() {
     else {
         read = false;
     }
+    form.reset();
     let newBook = new Book(title, author, pages, read);
+    console.log(newBook)
+    console.log(myLibrary)
     myLibrary.push(newBook);
-    displayLibrary()
+    storeLists(myLibrary);
+    displayLibrary(myLibrary);
 }
 
-function displayLibrary() {
+function displayLibrary(myLibrary) {
     const shelf = document.querySelector(".book-display")
     shelf.replaceChildren();
     for (let i = 0; i < myLibrary.length; i++) {
@@ -67,12 +71,13 @@ function toggleReadStatus(index) {
         readDiv.read = true;
         // readDiv.style.backgroundColor = "#22c55e"
     }
-    displayLibrary();
+    displayLibrary(myLibrary);
 }
 
 function removeBook(index) {
     myLibrary.splice(index, 1)
-    displayLibrary()
+    storeLists(myLibrary)
+    displayLibrary(myLibrary)
 }
 
 const newBookBtn = document.querySelector("#new-book-btn");
@@ -96,8 +101,33 @@ document.querySelector("#new-book-form").addEventListener("submit", function(eve
     addBookToLibrary();
 })
 
+function storeLists(myLibrary) {
+    let library = JSON.stringify(myLibrary);
+    localStorage.setItem("library", library);
+}
+
+function getLists() {
+    let libraryString = localStorage.getItem("library");
+    myLibrary = JSON.parse(libraryString);
+    return myLibrary;
+}
+
 // This piece of code removes the "Confirm form resubmission" pop up
 if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
   }
 
+if(document.cookie.indexOf('mycookie')==-1) {
+    // The cookie doesn't exist. Create it now
+    document.cookie = 'mycookie=1';
+    // let myLibrary = []
+    // Array that stores all books
+    let myLibrary = [];
+    myLibrary = getLists()
+    displayLibrary(myLibrary)
+}
+else {
+    // Not the first visit, so alert
+    myLibrary = getLists()
+    displayLibrary(myLibrary)
+}
